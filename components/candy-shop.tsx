@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ShoppingCart, Plus, Minus, Sparkles } from "lucide-react"
+import { ShoppingCart, Plus, Minus, Sparkles } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -25,7 +25,7 @@ const products: Product[] = [
     name: "Gomitas de Ositos",
     price: 2.99,
     category: "Gomitas",
-    image: "/colorful-gummy-bears.jpg",
+    image: "/colorful-gummy-bears-candy.jpg",
   },
   {
     id: 2,
@@ -39,7 +39,7 @@ const products: Product[] = [
     name: "Caramelos Duros",
     price: 1.99,
     category: "Caramelos",
-    image: "/hard-candy-assorted.jpg",
+    image: "/assorted-hard-candy.jpg",
   },
   {
     id: 4,
@@ -67,7 +67,7 @@ const products: Product[] = [
     name: "Malvaviscos",
     price: 2.49,
     category: "Suaves",
-    image: "/marshmallows-colorful.jpg",
+    image: "/colorful-marshmallows.jpg",
   },
   {
     id: 8,
@@ -88,6 +88,9 @@ const products: Product[] = [
 export function CandyShop() {
   const [cart, setCart] = useState<CartItem[]>([])
   const [selectedCategory, setSelectedCategory] = useState<string>("Todos")
+  const [customerName, setCustomerName] = useState("")
+  const [customerAddress, setCustomerAddress] = useState("")
+  const [customerPhone, setCustomerPhone] = useState("")
 
   const categories = ["Todos", ...Array.from(new Set(products.map((p) => p.category)))]
 
@@ -116,6 +119,56 @@ export function CandyShop() {
         })
         .filter(Boolean) as CartItem[]
     })
+  }
+
+  const handleOrder = () => {
+    if (!customerName || !customerAddress || !customerPhone) {
+      alert("Por favor completa todos los campos")
+      return
+    }
+
+    const orderSummary = {
+      cliente: {
+        nombre: customerName,
+        direccion: customerAddress,
+        telefono: customerPhone,
+      },
+      productos: cart.map((item) => ({
+        nombre: item.name,
+        cantidad: item.quantity,
+        precioUnitario: item.price,
+        subtotal: item.price * item.quantity,
+      })),
+      total: totalPrice,
+      fecha: new Date().toLocaleString("es-ES"),
+    }
+
+    // Print order to console
+    console.log("=== NUEVA ORDEN ===")
+    console.log(JSON.stringify(orderSummary, null, 2))
+    console.log("==================")
+
+    // Create WhatsApp message
+    const whatsappMessage = `*🍬 NUEVA ORDEN - Dulcería Encantada*\n\n*Cliente:*\n👤 ${customerName}\n📍 ${customerAddress}\n📱 ${customerPhone}\n\n*Productos:*\n${cart
+      .map(
+        (item, index) =>
+          `${index + 1}. ${item.name}\n   Cantidad: ${item.quantity}\n   Precio: $${item.price.toFixed(2)}\n   Subtotal: $${(item.price * item.quantity).toFixed(2)}`
+      )
+      .join("\n\n")}\n\n*TOTAL: $${totalPrice.toFixed(2)}*\n\n📅 ${new Date().toLocaleString("es-ES")}`
+
+    // Encode message for WhatsApp URL
+    const encodedMessage = encodeURIComponent(whatsappMessage)
+    
+    // Open WhatsApp with pre-filled message
+    window.open(`https://wa.me/?text=${encodedMessage}`, "_blank")
+
+    // Clear cart and form
+    setCart([])
+    setCustomerName("")
+    setCustomerAddress("")
+    setCustomerPhone("")
+    
+    alert("¡Pedido enviado! Se abrirá WhatsApp para confirmar tu orden.")
   }
 
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0)
@@ -202,17 +255,33 @@ export function CandyShop() {
                   <div className="space-y-4">
                     <div className="space-y-2">
                       <Label htmlFor="name">Nombre</Label>
-                      <Input id="name" placeholder="Tu nombre completo" />
+                      <Input
+                        id="name"
+                        placeholder="Tu nombre completo"
+                        value={customerName}
+                        onChange={(e) => setCustomerName(e.target.value)}
+                      />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="address">Dirección</Label>
-                      <Input id="address" placeholder="Dirección de entrega" />
+                      <Input
+                        id="address"
+                        placeholder="Dirección de entrega"
+                        value={customerAddress}
+                        onChange={(e) => setCustomerAddress(e.target.value)}
+                      />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="phone">Teléfono</Label>
-                      <Input id="phone" type="tel" placeholder="Tu número de teléfono" />
+                      <Input
+                        id="phone"
+                        type="tel"
+                        placeholder="Tu número de teléfono"
+                        value={customerPhone}
+                        onChange={(e) => setCustomerPhone(e.target.value)}
+                      />
                     </div>
-                    <Button className="w-full" size="lg">
+                    <Button className="w-full" size="lg" onClick={handleOrder}>
                       Realizar Pedido
                     </Button>
                   </div>
