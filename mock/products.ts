@@ -9,7 +9,7 @@ export type Product = {
   image: StaticImageData
 }
 
-const productsData: Product[] = [
+const productsData: Product[] = [ 
   {
     id: 1,
     name: "Gomitas de Ositos",
@@ -73,6 +73,84 @@ const productsData: Product[] = [
     category: "Chocolates",
     image: images.store.chocolate_negro,
   },
-]
+  {
+    id: 10,
+    name: "Gomitas Enchiladas",
+    price: 3.29,
+    category: "Gomitas",
+    image: images.store.gomitas_enchiladas,
+  },
+  {
+    id: 11,
+    name: "Paleta de Tamarindo",
+    price: 1.99,
+    category: "Paletas",
+    image: images.store.paleta_tamarindo,
+  },
+  {
+    id: 12,
+    name: "Chocolate con Almendras",
+    price: 5.49,
+    category: "Chocolates",
+    image: images.store.chocolate_almendras,
+  },
+  {
+    id: 13,
+    name: "Chicles de Fresa",
+    price: 1.69,
+    category: "Chicles",
+    image: images.store.chicles_fresa,
+  },
+  {
+    id: 14,
+    name: "Gomitas de Fruta",
+    price: 2.89,
+    category: "Gomitas",
+    image: images.store.gomitas_fruta,
+  },
+  {
+    id: 15,
+    name: "Malvaviscos Rellenos",
+    price: 3.19,
+    category: "Suaves",
+    image: images.store.malvavisco_relleno,
+  },
+  {
+    id: 16,
+    name: "Caramelos de Miel",
+    price: 2.59,
+    category: "Caramelos",
+    image: images.store.caramelos_miel,
+  },
+  {
+    id: 17,
+    name: "Chocolate con Nueces",
+    price: 5.99,
+    category: "Chocolates",
+    image: images.store.chocolate_nueces,
+  },
+  {
+    id: 18,
+    name: "Paleta Arcoíris",
+    price: 1.79,
+    category: "Paletas",
+    image: images.store.paleta_arcoiris,
+  },
+  {
+    id: 19,
+    name: "Chicles Surtidos",
+    price: 2.29,
+    category: "Chicles",
+    image: images.store.chicles_surtidos,
+  },
+  {
+    id: 20,
+    name: "Gomitas de Mango",
+    price: 3.39,
+    category: "Gomitas",
+    image: images.store.gomitas_mango,
+  },
+];
+
 
 export default productsData

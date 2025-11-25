@@ -7,6 +7,17 @@ import gomitas_asidas from "./gomitas_asidas.webp"
 import gomitas_osos from "./gomitas_osos.webp"
 import malvavisco from "./malvavisco.webp"
 import paleta from "./paleta.webp"
+import caramelos_miel from './caramelos_miel.webp'
+import chicles_fresa from './chicles_fresa.webp'
+import chicles_surtidos from './chicles_surtidos.webp'
+import chocolate_almendras from './chocolate_almendras.webp'
+import chocolate_nueces from './chocolate_nueces.webp'
+import gomitas_enchiladas from './gomitas_enchiladas.webp'
+import gomitas_fruta from './gomitas_fruta.webp'
+import gomitas_mango from './gomitas_mango.webp'
+import malvavisco_relleno from './malvavisco_relleno.webp'
+import paleta_arcoiris from './paleta_arcoiris.webp'
+import paleta_tamarindo from './paleta_tamarindo.webp'
 
 const images = {
     store: {
@@ -18,7 +29,18 @@ const images = {
         gomitas_asidas,
         gomitas_osos,
         malvavisco,
-        paleta
+        paleta,
+        caramelos_miel,
+        chicles_fresa,
+        chicles_surtidos,
+        chocolate_almendras,
+        chocolate_nueces,
+        gomitas_enchiladas,
+        gomitas_fruta,
+        gomitas_mango,
+        malvavisco_relleno,
+        paleta_arcoiris,
+        paleta_tamarindo
     }
 }
 
